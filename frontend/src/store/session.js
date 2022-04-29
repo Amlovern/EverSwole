@@ -48,6 +48,24 @@ export const restoreUser = () => async dispatch => {
     }
 }
 
+export const signupUser = (user) => async dispatch => {
+    const { username, email, password } = user;
+    const response = await csrfFetch('/api/users', {
+        method:'POST',
+        body: JSON.stringify({
+            username,
+            email,
+            password
+        })
+    })
+
+    if (response.ok) {
+        const newUser = await response.json();
+        dispatch(set(newUser.user));
+        return newUser;
+    }
+}
+
 /*
     If current session user, session slice of state looks like this:
     {
@@ -68,7 +86,7 @@ const sessionReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_USER:
             const newUserState = {};
-            newUserState.user = action.user.user;
+            newUserState.user = action.user;
             console.log(action.user);
             return newUserState;
         case RESTORE_USER:
