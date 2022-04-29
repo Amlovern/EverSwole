@@ -1,0 +1,15 @@
+.sign-in {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: lightgreen;
+}
+
+.sign-in > * {
+    margin: 4px;
+}
+
+.login-button {
+    border-radius: 12%;
+    font-size: 15px;
+    background-color: rgb(224, 245, 224);
+}

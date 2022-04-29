@@ -13,17 +13,14 @@ const remove = () => ({
 })
 
 export const loginUser = (user) => async dispatch => {
-    console.log('************************', user);
-    const { email, username, password } = user
-    // let csrf = await csrfFetch('/api/session', {method: "POST"}).then(res => res.json());
-    // console.log('csrf fetch', csrf)
+    const { credential, password } = user
     const response = await csrfFetch('/api/session', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            credential: username ? username : email,
+            credential,
             password
         })
     })
@@ -31,6 +28,7 @@ export const loginUser = (user) => async dispatch => {
     if (response.ok) {
         const newUser = await response.json();
         dispatch(set(newUser));
+        return newUser;
     }
 }
 
@@ -53,9 +51,9 @@ const initialState = {
 const sessionReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_USER:
-            const newUserState = {...state};
-            newUserState['user'] = action.user;
-            return {...newUserState};
+            const newUserState = {};
+            newUserState.user = action.user.user;
+            return newUserState;
         case REMOVE_USER:
             const newState = {...state};
             newState['user'] = null;
