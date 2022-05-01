@@ -33,7 +33,7 @@ export const loginUser = (user) => async dispatch => {
 
     if (response.ok) {
         const newUser = await response.json();
-        dispatch(set(newUser));
+        dispatch(set(newUser.user));
         return newUser;
     }
 }
