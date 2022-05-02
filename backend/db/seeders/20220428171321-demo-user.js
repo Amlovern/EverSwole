@@ -13,8 +13,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-   return queryInterface.bulkDelete('Users', {
-     username: { [Op.in]: ['Demo User'] }
-   }, {});
+   return queryInterface.bulkDelete('Users', null, {});
   }
 };
