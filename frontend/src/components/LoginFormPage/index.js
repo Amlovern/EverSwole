@@ -27,6 +27,20 @@ const LoginFormPage = () => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
+    };
+
+    const demoLogin = async (e) => {
+        e.preventDefault();
+        setErrors([]);
+        const user = {
+            credential: 'demo@user.com',
+            password: 'password'
+        };
+        return (dispatch(sessionActions.loginUser(user)))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            });
     }
 
     return (
@@ -57,6 +71,7 @@ const LoginFormPage = () => {
                 />
             </label>
             <button className='login-button' type='submit'>Log In</button>
+            <button className='demo-login' type='button' onClick={demoLogin}>Demo User</button>
         </form>
     );
 };
