@@ -98,7 +98,6 @@ const sessionReducer = (state = initialState, action) => {
         case SET_USER:
             const newUserState = {};
             newUserState.user = action.user;
-            console.log(action.user);
             return newUserState;
         case RESTORE_USER:
             const restoredUserState = {};
