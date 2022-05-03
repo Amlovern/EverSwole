@@ -39,8 +39,8 @@ const ExercisesPage = () => {
                     <>
                         <ul>
                             <li key={exercise.id}>
-                                <div>{exercise.title}</div>
-                                <div>{exercise.content}</div>
+                                <div>Exercise Name: {exercise.title}</div>
+                                <div>Exercise Description: {exercise.content}</div>
                                 <button value={exercise.id} onClick={handleDelete}>Delete Exercise</button>
                             </li>
                         </ul>

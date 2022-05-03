@@ -75,7 +75,8 @@ const exerciseReducer = (state = initialState, action) => {
             if (!state[action.exercise.id]) {
                 const newState = {
                     ...state,
-                    [action.exercise.id]: action.exercise
+                    [action.exercise.id]: action.exercise,
+                    list: [...state.list, action.exercise]
                 };
                 const exerciseList = newState.list.map(id => newState[id]);
                 exerciseList.push(action.exercise);
@@ -85,8 +86,9 @@ const exerciseReducer = (state = initialState, action) => {
                 ...state,
                 [action.exercise.id]: {
                     ...state[action.exercise.id],
-                    ...action.exercise
-                }
+                    ...action.exercise,
+                    list: state.list
+                },
             };
         case UPDATE_EXERCISE:
             const updatedState = {
