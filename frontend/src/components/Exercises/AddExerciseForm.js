@@ -21,7 +21,7 @@ const AddExerciseForm = () => {
         let newExercise = await dispatch(addNewExercise(payload));
         if (newExercise) {
             return (
-                <Redirect to={`/api/exercises/${newExercise.id}`} />
+                <Redirect to={'/api/exercises'} />
             )
         }
     }

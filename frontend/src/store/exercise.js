@@ -1,12 +1,30 @@
 import { csrfFetch } from "./csrf";
 
 const ADD_EXERCISE = 'exercise/ADD_EXERCISE';
+const UPDATE_EXERCISE = 'exercise/UPDATE_EXERCISE';
+const GET_EXERCISES = 'exercise/GET_EXERCISES';
+const DELETE_EXERCISE = 'exercise/DELETE_EXERCISE';
 
 
 const addExercise = exercise => ({
     type: ADD_EXERCISE,
     exercise
 });
+
+const updateExercise = exercise => ({
+    type: UPDATE_EXERCISE,
+    exercise
+});
+
+const getExercises = list => ({
+    type: GET_EXERCISES,
+    list
+});
+
+const deleteExercise = (exercise) => ({
+    type: DELETE_EXERCISE,
+    exercise
+})
 
 export const addNewExercise = (payload) => async dispatch => {
     const response = await csrfFetch('/api/exercises', {
@@ -22,16 +40,79 @@ export const addNewExercise = (payload) => async dispatch => {
     };
 };
 
-const initialState = {};
+export const updateOneExercise = payload => async dispatch => {
+    console.log(payload)
+    // const response = await csrfFetch(`/api/exercises/${}`)
+}
+
+export const getAllExercises = () => async dispatch => {
+    const response = await csrfFetch('/api/exercises');
+
+    if (response) {
+        const exerciseList = await response.json();
+        dispatch(getExercises(exerciseList));
+    };
+};
+
+export const deleteOneExercise = (exerciseId) => async dispatch => {
+    const response = await csrfFetch(`/api/exercises/${exerciseId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const deletedExercise = await response.json();
+        dispatch(deleteExercise(deletedExercise))
+    }
+}
+
+const initialState = {
+    list: []
+};
 
 const exerciseReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_EXERCISE:
-            const newState = {
+            if (!state[action.exercise.id]) {
+                const newState = {
+                    ...state,
+                    [action.exercise.id]: action.exercise
+                };
+                const exerciseList = newState.list.map(id => newState[id]);
+                exerciseList.push(action.exercise);
+                return newState;
+            }
+            return {
+                ...state,
+                [action.exercise.id]: {
+                    ...state[action.exercise.id],
+                    ...action.exercise
+                }
+            };
+        case UPDATE_EXERCISE:
+            const updatedState = {
                 ...state,
                 [action.exercise.id]: action.exercise
+            }
+            return updatedState
+        case GET_EXERCISES:
+            const allExercises = {};
+            action.list.forEach(exercise => {
+                allExercises[exercise.id] = exercise;
+            });
+            return {
+                ...allExercises,
+                ...state,
+                list: action.list
             };
-            return newState;
+        case DELETE_EXERCISE:
+            const postDeletionState = {
+                ...state,
+                list: state.list.filter(
+                    (exercise) => exercise.id !== action.exercise.id
+                    )
+                };
+            delete postDeletionState[action.exercise.id];
+            return postDeletionState;
         default:
             return state;
     };

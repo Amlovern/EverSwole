@@ -30,9 +30,7 @@ router.get('/', restoreUser, asyncHandler(async (req, res) => {
         }
     });
     if (exercises) {
-        const exerciseList = exercises.map((exercise) => {
-            console.log(exercise.title)
-        })
+        return res.json(exercises)
     } else {
         console.log('That didn\'t work!')
     }
@@ -123,6 +121,7 @@ router.delete('/:exerciseId', restoreUser, asyncHandler(async (req, res) => {
 
     if (specificExercise) {
         await specificExercise.destroy();
+        return res.json(specificExercise);
     }
 }))
 
