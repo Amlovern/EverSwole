@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import addNewExercise from '../../store/exercise';
+import {addNewExercise} from '../../store/exercise';
 import { Redirect } from 'react-router-dom'
 
 const AddExerciseForm = () => {

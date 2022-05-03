@@ -9,7 +9,6 @@ const addExercise = exercise => ({
 });
 
 export const addNewExercise = (payload) => async dispatch => {
-    console.log('LINE 12')
     const response = await csrfFetch('/api/exercises', {
         method:'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -18,24 +17,21 @@ export const addNewExercise = (payload) => async dispatch => {
 
     if (response.ok) {
         const newExercise = await response.json();
-        console.log(newExercise);
-        // dispatch(addExercise(newExercise));
-        // return newExercise;
+        dispatch(addExercise(newExercise));
+        return newExercise;
     };
 };
 
 const initialState = {};
 
 const exerciseReducer = (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
-        // case ADD_EXERCISE:
-        //     console.log(action.exercise)
-            // const newState = {
-            //     ...state,
-            //     [action.exercise.id]: {action.exercise}
-            // };
-            // return newState;
+        case ADD_EXERCISE:
+            const newState = {
+                ...state,
+                [action.exercise.id]: action.exercise
+            };
+            return newState;
         default:
             return state;
     };

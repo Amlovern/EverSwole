@@ -66,17 +66,17 @@ router.post('/', restoreUser, validateExercise, asyncHandler(async (req, res) =>
         }
     });
 
-    const newExercise = await db.Exercise.build({
-        userId: user.id,
-        title,
-        content,
-        workoutId: workout.id
-    })
 
     const validationErrors = validationResult(req);
 
     if (validationErrors.isEmpty()) {
-        await newExercise.save();
+        const newExercise = await db.Exercise.create({
+            userId: user.id,
+            title,
+            content,
+            workoutId: workout.id
+        })
+        return res.json(newExercise);
     } else {
         const errors = validationErrors.array().map((error) => error.msg);
         console.log(errors)
