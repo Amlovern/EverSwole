@@ -57,43 +57,14 @@ router.get('/:exerciseId', restoreUser, asyncHandler(async (req, res) => {
 }));
 
 router.post('/', restoreUser, validateExercise, asyncHandler(async (req, res) => {
-    console.log('INSIDE THE POST ROUTE')
-    console.log('REQ BODY', req.body)
     const { user } = req;
     const { title, content, workoutTitle } = req.body;
-    console.log('TITLE', title, 'CONTENT', content, 'WORKOUT', workoutTitle)
     const workout = await db.Workout.findOne({
         where: {
             userId: user.id,
             title: workoutTitle
         }
     });
-
-    // Works
-    // csrfFetch('/api/exercises/', {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //         title: "Bench Press",
-    //         content: "Did with 100lb. Performed 8-10 Reps per set. Did a total of 3 sets.",
-    //         workoutTitle: "Push Day"
-    //     })
-    // })
-
-    // Does not work
-    // csrfFetch('/api/exercises/', {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //         title: "Bench Press",
-    //         content: "Did with 100lb. Performed 8-10 Reps per set. Did a total of 3 sets.",
-    //         workoutTitle: "Push Day"
-    //     })
-    // })
 
     const newExercise = await db.Exercise.build({
         userId: user.id,
