@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as workoutActions from '../../store/workout';
 import AddWorkoutForm from "./AddWorkout";
+import DeleteWorkout from "./DeleteWorkout";
 
 const WorkoutPage = () => {
     const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const WorkoutPage = () => {
                         <ul>
                             <li key={workout.id}>
                                 <div>Workout Name: {workout.title}</div>
+                                <DeleteWorkout workout={workout} />
                             </li>
                         </ul>
                     </>

@@ -46,6 +46,17 @@ export const addNewWorkout = payload => async dispatch => {
     };
 };
 
+export const deleteOneWorkout = workoutId => async dispatch => {
+    const response = await csrfFetch(`/api/workouts/${workoutId}`, {
+        method: "DELETE"
+    });
+
+    if (response.ok) {
+        const deletedWorkout = await response.json();
+        dispatch(deleteWorkout(deletedWorkout));
+    };
+};
+
 const initialState = {
     list: []
 };
@@ -81,8 +92,17 @@ const workoutReducer = (state = initialState, action) => {
                 ...state,
                 list: action.list
             };
-
-        default: return state
+        case DELETE_WORKOUT:
+            const postDeletionState = {
+                ...state,
+                list: state.list.filter(
+                    (workout) => workout.id !== action.workout.id
+                )
+            };
+            delete postDeletionState[action.workout.id];
+            return postDeletionState
+        default:
+            return state;
     };
 };
 
