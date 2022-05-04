@@ -10,7 +10,10 @@ const Navigation = ({ isLoaded }) => {
     let sessionLinks;
     if (loggedUser) {
         sessionLinks= (
-            <ProfileButton user={loggedUser} />
+            <>
+                <ProfileButton user={loggedUser} />
+                <NavLink to={'/exercises'}>My Exercises</NavLink>
+            </>
         )
     } else {
         sessionLinks = (
@@ -23,7 +26,7 @@ const Navigation = ({ isLoaded }) => {
 
     return (
         <ul>
-            <li>
+            <li key='nav'>
                 <NavLink exact to={'/'}>Home</NavLink>
                 {isLoaded && sessionLinks}
             </li>

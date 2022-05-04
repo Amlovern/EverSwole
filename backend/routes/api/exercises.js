@@ -30,9 +30,7 @@ router.get('/', restoreUser, asyncHandler(async (req, res) => {
         }
     });
     if (exercises) {
-        const exerciseList = exercises.map((exercise) => {
-            console.log(exercise.title)
-        })
+        return res.json(exercises)
     } else {
         console.log('That didn\'t work!')
     }
@@ -57,11 +55,8 @@ router.get('/:exerciseId', restoreUser, asyncHandler(async (req, res) => {
 }));
 
 router.post('/', restoreUser, validateExercise, asyncHandler(async (req, res) => {
-    console.log('INSIDE THE POST ROUTE')
-    console.log('REQ BODY', req.body)
     const { user } = req;
     const { title, content, workoutTitle } = req.body;
-    console.log('TITLE', title, 'CONTENT', content, 'WORKOUT', workoutTitle)
     const workout = await db.Workout.findOne({
         where: {
             userId: user.id,
@@ -69,43 +64,17 @@ router.post('/', restoreUser, validateExercise, asyncHandler(async (req, res) =>
         }
     });
 
-    // Works
-    // csrfFetch('/api/exercises/', {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //         title: "Bench Press",
-    //         content: "Did with 100lb. Performed 8-10 Reps per set. Did a total of 3 sets.",
-    //         workoutTitle: "Push Day"
-    //     })
-    // })
-
-    // Does not work
-    // csrfFetch('/api/exercises/', {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //         title: "Bench Press",
-    //         content: "Did with 100lb. Performed 8-10 Reps per set. Did a total of 3 sets.",
-    //         workoutTitle: "Push Day"
-    //     })
-    // })
-
-    const newExercise = await db.Exercise.build({
-        userId: user.id,
-        title,
-        content,
-        workoutId: workout.id
-    })
 
     const validationErrors = validationResult(req);
 
     if (validationErrors.isEmpty()) {
-        await newExercise.save();
+        const newExercise = await db.Exercise.create({
+            userId: user.id,
+            title,
+            content,
+            workoutId: workout.id
+        })
+        return res.json(newExercise);
     } else {
         const errors = validationErrors.array().map((error) => error.msg);
         console.log(errors)
@@ -128,14 +97,15 @@ router.post('/:exerciseId', restoreUser, validateExercise, asyncHandler(async (r
 
     if (validationErrors.isEmpty()) {
         if (specificExercise) {
-            await specificExercise.update({
+            const updatedExercise = await specificExercise.update({
                 title,
                 content
             })
+            return res.json(updatedExercise)
         }
     } else {
         const errors = validationErrors.array().map((error) => error.msg);
-        console.log(errors)
+        console.errors(errors)
     }
 }))
 
@@ -152,6 +122,7 @@ router.delete('/:exerciseId', restoreUser, asyncHandler(async (req, res) => {
 
     if (specificExercise) {
         await specificExercise.destroy();
+        return res.json(specificExercise);
     }
 }))
 
