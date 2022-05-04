@@ -20,9 +20,9 @@ const AddExerciseForm = () => {
         };
         let newExercise = await dispatch(addNewExercise(payload));
         if (newExercise) {
-            return (
-                <Redirect to={'/api/exercises'} />
-            )
+            setTitle('');
+            setContent('');
+            setWorkoutTitle('');
         }
     }
 
@@ -39,7 +39,7 @@ const AddExerciseForm = () => {
                 }}
             />
             <textarea
-                placeholder='Exercise Content'
+                placeholder='Exercise Description'
                 required
                 value={content}
                 onChange={(e) => {

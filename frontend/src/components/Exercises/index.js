@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddExerciseForm from './AddExerciseForm';
+import DeleteExercise from './DeleteExercise';
 import { Redirect } from 'react-router-dom';
 import * as exerciseActions from '../../store/exercise';
 
@@ -11,29 +12,33 @@ const ExercisesPage = () => {
         return state.exercise.list.map(exercise => exercise)
     });
 
+    const [createFormOpen, setCreateFormOpen] = useState(false);
+
     useEffect(() => {
         dispatch(exerciseActions.getAllExercises())
     }, [dispatch]);
 
-    const handleDelete = async (e) => {
-        e.preventDefault();
-        const exerciseId = e.target.value;
-        dispatch(exerciseActions.deleteOneExercise(exerciseId));
-    }
+    const toggleCreateFormOpen = () => {
+        setCreateFormOpen(!createFormOpen);
+    };
 
     if (!loggedUser) return (
         <Redirect to={'/login'} />
     )
 
-    // let exerciseElements = (
-
-    // )
     if (!exercises) {
         return null
     };
     return (
         <div>
-            <AddExerciseForm />
+            <button onClick={toggleCreateFormOpen}>
+                Create an Exercise
+                <i class="fa-solid fa-circle-plus"></i>
+            </button>
+            {createFormOpen ?
+                <AddExerciseForm />
+            : null
+            }
             {exercises.map((exercise) => {
                 return (
                     <>
@@ -41,7 +46,7 @@ const ExercisesPage = () => {
                             <li key={exercise.id}>
                                 <div>Exercise Name: {exercise.title}</div>
                                 <div>Exercise Description: {exercise.content}</div>
-                                <button value={exercise.id} onClick={handleDelete}>Delete Exercise</button>
+                                <DeleteExercise exercise/>
                             </li>
                         </ul>
                     </>

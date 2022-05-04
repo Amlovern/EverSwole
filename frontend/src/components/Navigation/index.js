@@ -10,7 +10,10 @@ const Navigation = ({ isLoaded }) => {
     let sessionLinks;
     if (loggedUser) {
         sessionLinks= (
-            <ProfileButton user={loggedUser} />
+            <>
+                <ProfileButton user={loggedUser} />
+                <NavLink to={'/exercises'}>My Exercises</NavLink>
+            </>
         )
     } else {
         sessionLinks = (
