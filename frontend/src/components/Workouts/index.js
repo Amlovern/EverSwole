@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as workoutActions from '../../store/workout';
+import AddWorkoutForm from "./AddWorkout";
 
 const WorkoutPage = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const WorkoutPage = () => {
 
     return (
         <div>
+            <AddWorkoutForm />
             {workouts.map((workout) => {
                 return (
                     <>

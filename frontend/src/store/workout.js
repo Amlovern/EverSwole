@@ -28,6 +28,24 @@ export const getAllWorkouts = () => async dispatch => {
     };
 };
 
+export const addNewWorkout = payload => async dispatch => {
+    const response = await csrfFetch('/api/workouts', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: payload.title
+        })
+    });
+
+    if (response.ok) {
+        const newWorkout = await response.json();
+        dispatch(addWorkout(newWorkout));
+        return newWorkout;
+    };
+};
+
 const initialState = {
     list: []
 };
