@@ -13,6 +13,7 @@ const Navigation = ({ isLoaded }) => {
             <>
                 <ProfileButton user={loggedUser} />
                 <NavLink to={'/exercises'}>My Exercises</NavLink>
+                <NavLink to={'/workouts'}>My Workouts</NavLink>
             </>
         )
     } else {
