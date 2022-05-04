@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddExerciseForm from './AddExerciseForm';
 import DeleteExercise from './DeleteExercise';
+import EditExerciseForm from './EditExerciseForm';
 import { Redirect } from 'react-router-dom';
 import * as exerciseActions from '../../store/exercise';
 
@@ -46,7 +47,8 @@ const ExercisesPage = () => {
                             <li key={exercise.id}>
                                 <div>Exercise Name: {exercise.title}</div>
                                 <div>Exercise Description: {exercise.content}</div>
-                                <DeleteExercise exercise/>
+                                <DeleteExercise exercise={exercise}/>
+                                <EditExerciseForm exercise={exercise}/>
                             </li>
                         </ul>
                     </>

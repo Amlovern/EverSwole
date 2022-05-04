@@ -97,14 +97,15 @@ router.post('/:exerciseId', restoreUser, validateExercise, asyncHandler(async (r
 
     if (validationErrors.isEmpty()) {
         if (specificExercise) {
-            await specificExercise.update({
+            const updatedExercise = await specificExercise.update({
                 title,
                 content
             })
+            return res.json(updatedExercise)
         }
     } else {
         const errors = validationErrors.array().map((error) => error.msg);
-        console.log(errors)
+        console.errors(errors)
     }
 }))
 

@@ -26,7 +26,7 @@ const Navigation = ({ isLoaded }) => {
 
     return (
         <ul>
-            <li>
+            <li key='nav'>
                 <NavLink exact to={'/'}>Home</NavLink>
                 {isLoaded && sessionLinks}
             </li>

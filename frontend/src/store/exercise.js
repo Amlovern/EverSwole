@@ -41,9 +41,23 @@ export const addNewExercise = (payload) => async dispatch => {
 };
 
 export const updateOneExercise = payload => async dispatch => {
-    console.log(payload)
-    // const response = await csrfFetch(`/api/exercises/${}`)
-}
+    const response = await csrfFetch(`/api/exercises/${payload.exerciseId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: payload.title,
+            content: payload.content
+        })
+    })
+
+    if (response) {
+        const updatedExercise = await response.json();
+        dispatch(updateExercise(updatedExercise));
+        return updatedExercise
+    };
+};
 
 export const getAllExercises = () => async dispatch => {
     const response = await csrfFetch('/api/exercises');
@@ -93,8 +107,12 @@ const exerciseReducer = (state = initialState, action) => {
         case UPDATE_EXERCISE:
             const updatedState = {
                 ...state,
-                [action.exercise.id]: action.exercise
+                [action.exercise.id]: action.exercise,
+                list: state.list
             }
+            const item = updatedState.list.find(element => element.id === action.exercise.id)
+            const itemIdx = updatedState.list.findIndex((element) => element === item);
+            updatedState.list[itemIdx] = action.exercise;
             return updatedState
         case GET_EXERCISES:
             const allExercises = {};
