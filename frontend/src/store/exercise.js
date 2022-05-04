@@ -21,7 +21,7 @@ const getExercises = list => ({
     list
 });
 
-const deleteExercise = (exercise) => ({
+const deleteExercise = exercise => ({
     type: DELETE_EXERCISE,
     exercise
 })
