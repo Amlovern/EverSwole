@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as workoutActions from '../../store/workout';
 import AddWorkoutForm from "./AddWorkout";
 import DeleteWorkout from "./DeleteWorkout";
+import './Workouts.css';
 
 const WorkoutPage = () => {
     const dispatch = useDispatch();
     const loggedUser = useSelector(state => state.session.user);
-    const workouts = useSelector(state => {
-        return state.workout.list.map(workout => workout)
-    });
+    const workoutsObj = useSelector(state => state.workout);
+    const workoutList = Object.values(workoutsObj);
 
     useEffect(() => {
         dispatch(workoutActions.getAllWorkouts())
@@ -20,25 +20,35 @@ const WorkoutPage = () => {
         <Redirect to={'/login'} />
     );
 
-    if (!workouts) {
+    if (!workoutList) {
         return null
     };
 
     return (
-        <div>
+        <div className="workouts-page">
+            <h1>Workouts</h1>
             <AddWorkoutForm />
-            {workouts.map((workout) => {
-                return (
-                    <>
-                        <ul>
-                            <li key={workout.id}>
-                                <div>Workout Name: {workout.title}</div>
-                                <DeleteWorkout workout={workout} />
-                            </li>
-                        </ul>
-                    </>
-                )
-            })}
+            <table id="workout-table">
+                <thead>
+                    <tr className="workout-table-headers">
+                        <th className="name-col" scope="col">Workout Name</th>
+                        <th className="username-col" scope="col">Created by</th>
+                        <th className="actions-col" scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {workoutList.map((workout) => {
+                        return (
+
+                            <tr>
+                                <td className="name-col">{workout.title}</td>
+                                <td className="username-col">{loggedUser.username}</td>
+                                <td className="actions-col"><DeleteWorkout workout={workout} /></td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
         </div>
     )
 };

@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     // A workout has many exercises
     Workout.hasMany(models.Exercise, {
       foreignKey: 'workoutId',
+      onDelete: 'CASCADE',
+      hooks: true
     });
   };
   return Workout;

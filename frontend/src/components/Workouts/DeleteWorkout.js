@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteOneWorkout } from "../../store/workout";
 
 
@@ -21,11 +21,12 @@ const DeleteWorkout = ({ workout }) => {
 
     return (
         <div>
-            <button onClick={toggleDeleteConfirmOpen}>Delete Workout</button>
+            <button className='action-button' onClick={toggleDeleteConfirmOpen}>Delete Workout</button>
                 {deleteConfirmOpen ?
                     <div>
-                        <button value={workout.id} onClick={handleDelete}>Confirm</button>
-                        <button onClick={toggleDeleteConfirmOpen}>Cancel</button>
+                        <p className="delete-warning">Delete Workout and All Related Exercises?</p>
+                        <button className='action-button' value={workout.id} onClick={handleDelete}>Confirm</button>
+                        <button className='action-button' onClick={toggleDeleteConfirmOpen}>Cancel</button>
                     </div>
                 : null}
         </div>

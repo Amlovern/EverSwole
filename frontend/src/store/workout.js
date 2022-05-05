@@ -2,7 +2,8 @@ import { csrfFetch } from "./csrf";
 
 const ADD_WORKOUT = 'workout/ADD_WORKOUT';
 const GET_WORKOUTS = 'workout/GET_WORKOUT';
-const DELETE_WORKOUT = 'workout/DELETE_WORKOUT';
+const GET_RECENT_WORKOUTS = 'workout/GET_RECENT_WORKOUTS';
+export const DELETE_WORKOUT = 'workout/DELETE_WORKOUT';
 
 const addWorkout = workout => ({
     type: ADD_WORKOUT,
@@ -57,9 +58,7 @@ export const deleteOneWorkout = workoutId => async dispatch => {
     };
 };
 
-const initialState = {
-    list: []
-};
+const initialState = {};
 
 const workoutReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -68,18 +67,14 @@ const workoutReducer = (state = initialState, action) => {
                 const newState = {
                     ...state,
                     [action.workout.id]: action.workout,
-                    list: [...state.list, action.workout]
                 };
-                const workoutList = newState.list.map(id => newState[id]);
-                workoutList.push(action.workout)
-                return newState
+               return newState
             }
             return {
                 ...state,
                 [action.workout.id]: {
                     ...state[action.workout.id],
                     ...action.workout,
-                    list: state.list
                 },
             };
         case GET_WORKOUTS:
@@ -90,14 +85,10 @@ const workoutReducer = (state = initialState, action) => {
             return {
                 ...allWorkouts,
                 ...state,
-                list: action.list
             };
         case DELETE_WORKOUT:
             const postDeletionState = {
                 ...state,
-                list: state.list.filter(
-                    (workout) => workout.id !== action.workout.id
-                )
             };
             delete postDeletionState[action.workout.id];
             return postDeletionState
