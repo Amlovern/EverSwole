@@ -9,11 +9,11 @@ const WorkoutPage = () => {
     const dispatch = useDispatch();
     const loggedUser = useSelector(state => state.session.user);
     const workouts = useSelector(state => {
-        return state.workout.list.map(workout => workout)
+        return state.workout.recent.map(workout => workout)
     });
 
     useEffect(() => {
-        dispatch(workoutActions.getAllWorkouts())
+        dispatch(workoutActions.getTheRecentWorkouts())
     }, [dispatch]);
 
     if (!loggedUser) return (

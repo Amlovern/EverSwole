@@ -14,8 +14,6 @@ const AddExerciseForm = () => {
     const [workoutTitle, setWorkoutTitle] = useState('');
     const [isOpen, setIsOpen] = useState(false);
 
-    console.log('WORKOUT OPTIONS?', workouts)
-
     useEffect(() => {
         dispatch(getAllWorkouts())
     }, [dispatch])

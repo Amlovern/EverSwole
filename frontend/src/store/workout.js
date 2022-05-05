@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const ADD_WORKOUT = 'workout/ADD_WORKOUT';
 const GET_WORKOUTS = 'workout/GET_WORKOUT';
+const GET_RECENT_WORKOUTS = 'workout/GET_RECENT_WORKOUTS';
 const DELETE_WORKOUT = 'workout/DELETE_WORKOUT';
 
 const addWorkout = workout => ({
@@ -11,6 +12,11 @@ const addWorkout = workout => ({
 
 const getWorkouts = list => ({
     type: GET_WORKOUTS,
+    list
+});
+
+const getRecentWorkouts = list => ({
+    type: GET_RECENT_WORKOUTS,
     list
 });
 
@@ -25,6 +31,15 @@ export const getAllWorkouts = () => async dispatch => {
     if (response.ok) {
         const workoutList = await response.json();
         dispatch(getWorkouts(workoutList));
+    };
+};
+
+export const getTheRecentWorkouts = () => async dispatch => {
+    const response = await csrfFetch('/api/workouts/recent');
+
+    if (response.ok) {
+        const workoutList = await response.json();
+        dispatch(getRecentWorkouts(workoutList));
     };
 };
 
@@ -58,7 +73,8 @@ export const deleteOneWorkout = workoutId => async dispatch => {
 };
 
 const initialState = {
-    list: []
+    list: [],
+    recent: []
 };
 
 const workoutReducer = (state = initialState, action) => {
@@ -68,8 +84,10 @@ const workoutReducer = (state = initialState, action) => {
                 const newState = {
                     ...state,
                     [action.workout.id]: action.workout,
-                    list: [...state.list, action.workout]
+                    list: [...state.list, action.workout],
+                    recent: [action.workout, ...state.recent]
                 };
+                newState.recent.pop();
                 const workoutList = newState.list.map(id => newState[id]);
                 workoutList.push(action.workout)
                 return newState
@@ -92,6 +110,17 @@ const workoutReducer = (state = initialState, action) => {
                 ...state,
                 list: action.list
             };
+        case GET_RECENT_WORKOUTS:
+            const recentWorkouts = {};
+            action.list.forEach(workout => {
+                recentWorkouts[workout.id] = workout;
+            });
+            return {
+                ...recentWorkouts,
+                ...state,
+                list: state.list,
+                recent: action.list
+            }
         case DELETE_WORKOUT:
             const postDeletionState = {
                 ...state,
