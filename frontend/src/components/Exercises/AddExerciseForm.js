@@ -5,9 +5,8 @@ import { getAllWorkouts } from '../../store/workout';
 
 const AddExerciseForm = () => {
     const dispatch = useDispatch();
-    const workouts = useSelector(state => {
-        return state.workout.list.map(workout => workout)
-    });
+    const workoutsObj = useSelector(state => state.workout);
+    const workoutList = Object.values(workoutsObj);
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -71,7 +70,7 @@ const AddExerciseForm = () => {
                         setWorkoutTitle(e.target.value)
                     }}>
                         <option value=''>Please Select a Workout...</option>
-                        {workouts.map((workout) => {
+                        {workoutList.map((workout) => {
                             return (
                                 <>
                                     <option value={workout.title}>{workout.title}</option>

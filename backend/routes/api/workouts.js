@@ -32,22 +32,6 @@ router.get('/', restoreUser, asyncHandler(async (req, res) => {
     }
 }));
 
-router.get('/recent', restoreUser, asyncHandler(async (req, res) => {
-    const { user } = req;
-    const workouts = await db.Workout.findAll({
-        where: {
-            userId: user.id
-        },
-        order: [['id', 'DESC']],
-        limit: 10
-    });
-    if (workouts) {
-        return res.json(workouts)
-    } else {
-        console.log('Try again next time!')
-    }
-}))
-
 router.get('/:workoutId', restoreUser, asyncHandler(async (req, res) => {
     const { user } = req;
     const workoutId = req.params.workoutId;

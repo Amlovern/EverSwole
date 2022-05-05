@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as workoutActions from '../../store/workout';
@@ -9,19 +9,18 @@ import './Workouts.css';
 const WorkoutPage = () => {
     const dispatch = useDispatch();
     const loggedUser = useSelector(state => state.session.user);
-    const workouts = useSelector(state => {
-        return state.workout.recent.map(workout => workout)
-    });
+    const workoutsObj = useSelector(state => state.workout);
+    const workoutList = Object.values(workoutsObj);
 
     useEffect(() => {
-        dispatch(workoutActions.getTheRecentWorkouts())
+        dispatch(workoutActions.getAllWorkouts())
     }, [dispatch]);
 
     if (!loggedUser) return (
         <Redirect to={'/login'} />
     );
 
-    if (!workouts) {
+    if (!workoutList) {
         return null
     };
 
@@ -38,7 +37,7 @@ const WorkoutPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {workouts.map((workout) => {
+                    {workoutList.map((workout) => {
                         return (
 
                             <tr>
@@ -50,18 +49,6 @@ const WorkoutPage = () => {
                     })}
                 </tbody>
             </table>
-            {/* {workouts.map((workout) => {
-                return (
-                    <>
-                        <ul className="workout-listing">
-                            <li key={workout.id}>
-                                <div>Workout Name: {workout.title}</div>
-                                <DeleteWorkout workout={workout} />
-                            </li>
-                        </ul>
-                    </>
-                )
-            })} */}
         </div>
     )
 };
