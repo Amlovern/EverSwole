@@ -23,6 +23,7 @@ const AddWorkoutForm = () => {
         if (newWorkout) {
             setTitle('');
         };
+        toggleOpen();
     };
 
 

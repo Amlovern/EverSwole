@@ -27,7 +27,8 @@ router.get('/', restoreUser, asyncHandler(async (req, res) => {
     const exercises = await db.Exercise.findAll({
         where: {
             userId: user.id
-        }
+        },
+        include: db.Workout
     });
     if (exercises) {
         return res.json(exercises)
@@ -74,7 +75,15 @@ router.post('/', restoreUser, validateExercise, asyncHandler(async (req, res) =>
             content,
             workoutId: workout.id
         })
-        return res.json(newExercise);
+
+        const foundExercise = await db.Exercise.findOne({
+            where: {
+                userId: user.id,
+                id: newExercise.id
+            },
+            include: db.Workout
+        })
+        return res.json(foundExercise);
     } else {
         const errors = validationErrors.array().map((error) => error.msg);
         console.log(errors)
