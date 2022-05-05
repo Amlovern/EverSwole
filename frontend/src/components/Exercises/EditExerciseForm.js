@@ -30,7 +30,7 @@ const EditExerciseForm = ({ exercise }) => {
 
     return (
         <div>
-            <button onClick={toggleEditFormOpen}>Edit Exercise</button>
+            <button className='action-button' onClick={toggleEditFormOpen}>Edit Exercise</button>
                 {editFormOpen ?
                     <form>
                         <input
@@ -43,6 +43,8 @@ const EditExerciseForm = ({ exercise }) => {
                             }}
                         />
                         <textarea
+                            cols="20"
+                            rows="5"
                             placeholder='Exercise Description'
                             required
                             value={content}
@@ -50,8 +52,8 @@ const EditExerciseForm = ({ exercise }) => {
                                 setContent(e.target.value)
                             }}
                         />
-                        <button value={exercise.id} onClick={handleEdit}>Confirm</button>
-                        <button onClick={toggleEditFormOpen}>Cancel</button>
+                        <button className='action-button' value={exercise.id} onClick={handleEdit}>Confirm</button>
+                        <button className='action-button' onClick={toggleEditFormOpen}>Cancel</button>
                     </form>
                 : null
                 }

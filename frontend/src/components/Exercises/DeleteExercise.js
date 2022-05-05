@@ -20,11 +20,12 @@ const DeleteExercise = ({ exercise }) => {
 
     return (
         <div>
-            <button onClick={toggleDeleteConfirmOpen}>Delete Exercise</button>
+            <button className='action-button' onClick={toggleDeleteConfirmOpen}>Delete Exercise</button>
                 {deleteConfirmOpen ?
                     <div>
-                        <button value={exercise.id} onClick={handleDelete}>Confirm</button>
-                        <button onClick={toggleDeleteConfirmOpen}>Cancel</button>
+                        <p className="delete-warning">Are you sure you want to delete?</p>
+                        <button className='action-button' value={exercise.id} onClick={handleDelete}>Confirm</button>
+                        <button className='action-button' onClick={toggleDeleteConfirmOpen}>Cancel</button>
                     </div>
                 : null
                 }
