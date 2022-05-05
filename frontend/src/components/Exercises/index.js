@@ -9,9 +9,8 @@ import { getAllExercises } from '../../store/exercise';
 const ExercisesPage = () => {
     const dispatch = useDispatch();
     const loggedUser = useSelector(state => state.session.user);
-    const exercises = useSelector(state => {
-        return state.exercise.list.map(exercise => exercise)
-    });
+    const exercisesObj = useSelector(state => state.exercise);
+    const exerciseList = Object.values(exercisesObj)
 
     useEffect(() => {
         dispatch(getAllExercises())
@@ -22,13 +21,13 @@ const ExercisesPage = () => {
         <Redirect to={'/login'} />
     )
 
-    if (!exercises) {
+    if (!exerciseList) {
         return null
     };
     return (
         <div>
             <AddExerciseForm />
-            {exercises.map((exercise) => {
+            {exerciseList.map((exercise) => {
                 return (
                     <>
                         <ul>

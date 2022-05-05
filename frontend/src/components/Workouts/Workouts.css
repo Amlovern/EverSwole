@@ -61,4 +61,10 @@ tbody tr:nth-child(even) {
     background-color: #00a82d;
     font-weight: bold;
     border: #206e35 1px solid;
+    margin: 3px;
+}
+
+.delete-warning {
+    font-size: 15px;
+    font-weight: bold;
 }

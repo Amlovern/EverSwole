@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { DELETE_WORKOUT } from "./workout";
 
 const ADD_EXERCISE = 'exercise/ADD_EXERCISE';
 const UPDATE_EXERCISE = 'exercise/UPDATE_EXERCISE';
@@ -80,7 +81,6 @@ export const deleteOneExercise = (exerciseId) => async dispatch => {
 }
 
 const initialState = {
-    list: []
 };
 
 const exerciseReducer = (state = initialState, action) => {
@@ -90,10 +90,7 @@ const exerciseReducer = (state = initialState, action) => {
                 const newState = {
                     ...state,
                     [action.exercise.id]: action.exercise,
-                    list: [...state.list, action.exercise]
                 };
-                const exerciseList = newState.list.map(id => newState[id]);
-                exerciseList.push(action.exercise);
                 return newState;
             }
             return {
@@ -101,18 +98,14 @@ const exerciseReducer = (state = initialState, action) => {
                 [action.exercise.id]: {
                     ...state[action.exercise.id],
                     ...action.exercise,
-                    list: state.list
                 },
             };
         case UPDATE_EXERCISE:
             const updatedState = {
                 ...state,
-                [action.exercise.id]: action.exercise,
-                list: state.list
             }
-            const item = updatedState.list.find(element => element.id === action.exercise.id)
-            const itemIdx = updatedState.list.findIndex((element) => element === item);
-            updatedState.list[itemIdx] = action.exercise;
+            updatedState[action.exercise.id].title = action.exercise.title;
+            updatedState[action.exercise.id].content = action.exercise.content;
             return updatedState
         case GET_EXERCISES:
             const allExercises = {};
@@ -122,17 +115,15 @@ const exerciseReducer = (state = initialState, action) => {
             return {
                 ...allExercises,
                 ...state,
-                list: action.list
             };
         case DELETE_EXERCISE:
             const postDeletionState = {
                 ...state,
-                list: state.list.filter(
-                    (exercise) => exercise.id !== action.exercise.id
-                    )
                 };
             delete postDeletionState[action.exercise.id];
             return postDeletionState;
+        case DELETE_WORKOUT:
+            return initialState;
         default:
             return state;
     };

@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 const ADD_WORKOUT = 'workout/ADD_WORKOUT';
 const GET_WORKOUTS = 'workout/GET_WORKOUT';
 const GET_RECENT_WORKOUTS = 'workout/GET_RECENT_WORKOUTS';
-const DELETE_WORKOUT = 'workout/DELETE_WORKOUT';
+export const DELETE_WORKOUT = 'workout/DELETE_WORKOUT';
 
 const addWorkout = workout => ({
     type: ADD_WORKOUT,
