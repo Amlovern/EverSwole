@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import * as workoutActions from '../../store/workout';
 import AddWorkoutForm from "./AddWorkout";
 import DeleteWorkout from "./DeleteWorkout";
+import './Workouts.css';
 
 const WorkoutPage = () => {
     const dispatch = useDispatch();
@@ -25,12 +26,34 @@ const WorkoutPage = () => {
     };
 
     return (
-        <div>
+        <div className="workouts-page">
+            <h1>Workouts</h1>
             <AddWorkoutForm />
-            {workouts.map((workout) => {
+            <table id="workout-table">
+                <thead>
+                    <tr className="workout-table-headers">
+                        <th className="name-col" scope="col">Workout Name</th>
+                        <th className="username-col" scope="col">Created by</th>
+                        <th className="actions-col" scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {workouts.map((workout) => {
+                        return (
+
+                            <tr>
+                                <td className="name-col">{workout.title}</td>
+                                <td className="username-col">{loggedUser.username}</td>
+                                <td className="actions-col"><DeleteWorkout workout={workout} /></td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+            {/* {workouts.map((workout) => {
                 return (
                     <>
-                        <ul>
+                        <ul className="workout-listing">
                             <li key={workout.id}>
                                 <div>Workout Name: {workout.title}</div>
                                 <DeleteWorkout workout={workout} />
@@ -38,7 +61,7 @@ const WorkoutPage = () => {
                         </ul>
                     </>
                 )
-            })}
+            })} */}
         </div>
     )
 };

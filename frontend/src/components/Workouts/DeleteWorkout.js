@@ -21,11 +21,11 @@ const DeleteWorkout = ({ workout }) => {
 
     return (
         <div>
-            <button onClick={toggleDeleteConfirmOpen}>Delete Workout</button>
+            <button className='action-button' onClick={toggleDeleteConfirmOpen}>Delete Workout</button>
                 {deleteConfirmOpen ?
                     <div>
-                        <button value={workout.id} onClick={handleDelete}>Confirm</button>
-                        <button onClick={toggleDeleteConfirmOpen}>Cancel</button>
+                        <button className='action-button' value={workout.id} onClick={handleDelete}>Confirm</button>
+                        <button className='action-button' onClick={toggleDeleteConfirmOpen}>Cancel</button>
                     </div>
                 : null}
         </div>

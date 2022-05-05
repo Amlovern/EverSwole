@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addNewWorkout } from "../../store/workout";
 
 
@@ -30,10 +30,11 @@ const AddWorkoutForm = () => {
 
     return (
         <>
-        <button onClick={toggleOpen}>Add a Workout</button>
+        <button className='add-workout-button' onClick={toggleOpen}>Add a Workout</button>
         {isOpen ?
-            <form onSubmit={handleSubmit}>
+            <form className="add-workout-form" onSubmit={handleSubmit}>
                 <input
+                    style={{height: 34}}
                     type='text'
                     placeholder="Workout Title"
                     required
@@ -42,8 +43,8 @@ const AddWorkoutForm = () => {
                         setTitle(e.target.value)
                     }}
                 />
-                <button type="submit">Submit</button>
-                <button type="button" onClick={toggleOpen}>Cancel</button>
+                <button className='add-workout-form-button' type="submit">Submit</button>
+                <button className='add-workout-form-button' type="button" onClick={toggleOpen}>Cancel</button>
             </form>
         : null
         }
