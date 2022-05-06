@@ -4,6 +4,8 @@ EverSwole is a web application where users can create and track workouts and exe
 
 Welcome to check out a live version of EverSwole here: [EverSwole.com](https://theeverswole.herokuapp.com/)
 
+![home](https://user-images.githubusercontent.com/97067452/167227093-baee2f2a-b41e-4807-8ea6-5b4f69a58a1a.PNG)
+
 The frontend of EverSwole is handled with React, Redux, CSS, and Javascript. The backend is built on express.js with a PostgresSQL database. Sequelize is used to manage the database.
 
 ## Getting Started
@@ -49,6 +51,16 @@ The frontend of EverSwole is handled with React, Redux, CSS, and Javascript. The
     - Users are able to create workouts to track their progress.
     - Users are able to look at all of their workouts.
     - Users are able to delete a workout, which will also delete all associated exercises.
+
+## Snapshots
+### Register
+![Register](https://user-images.githubusercontent.com/97067452/167227132-a7ec8fc1-3e7a-49c1-a6d6-f7e095b43ec1.PNG)
+### Login
+![Login](https://user-images.githubusercontent.com/97067452/167227142-511bf974-f5b7-4d1d-81f8-834d0e08dd48.PNG)
+### Workouts
+![Workouts](https://user-images.githubusercontent.com/97067452/167227149-6eaa6269-27f6-4394-a49d-e1976545992f.PNG)
+### Exercises
+![Exercises](https://user-images.githubusercontent.com/97067452/167227160-0bd71ec8-c576-4509-8ff2-54e3752b2e96.PNG)
 
 ## Future Features
 
