@@ -13,8 +13,8 @@ const validateWorkout = [
         .withMessage('Please provide a title.'),
     check('title')
         .exists({ checkFalsy: true })
-        .isLength({ max: 256 })
-        .withMessage('Title must be less than 256 characters.'),
+        .isLength({ max: 30 })
+        .withMessage('Title must be less than 30 characters.'),
     handleValidationErrors
 ];
 

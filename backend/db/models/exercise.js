@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     title: {
-      type: DataTypes.STRING(256),
+      type: DataTypes.STRING(30),
       allowNull: false
     },
     content: {
