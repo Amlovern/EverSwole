@@ -1,4 +1,4 @@
-.sign-in {
+.sign-up {
     font-size: 18px;
     font-weight: bold;
     background-color: rgb(200, 243, 200);
@@ -8,11 +8,11 @@
     text-align: center;
 }
 
-.sign-in > * {
+.sign-up > * {
     margin: 4px;
 }
 
-.sign-in > button {
+.sign-up > button {
     background-color: #00a82d;
     font-weight: bold;
     font-size: 18px;
@@ -22,7 +22,7 @@
     width: 25%;
 }
 
-.login-label {
+.sign-up-label {
     display: flex;
     flex-direction: column;
     font-size: 24px;
@@ -30,7 +30,8 @@
     width: 25%;
 }
 
-.login-label > input {
+.sign-up-label > input {
     margin: 4%;
     height: 20px;
+    margin-top: 2.5%;
 }
