@@ -35,3 +35,13 @@
     height: 20px;
     margin-top: 2.5%;
 }
+
+.sign-up-errors-list {
+    list-style-type: none;
+}
+
+.sign-up-error {
+    font-size: 30px;
+    margin: 2%;
+    color: rgb(253, 46, 46);
+}

@@ -45,8 +45,8 @@ const LoginFormPage = () => {
 
     return (
         <form className='sign-in' onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            <ul className='login-errors-list'>
+                {errors.map((error, idx) => <li className='login-error' key={idx}>{error}</li>)}
             </ul>
             <label className='login-label'>
                 Username or Email
