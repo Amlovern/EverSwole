@@ -5,6 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import ExercisesPage from "./components/Exercises";
 import WorkoutPage from "./components/Workouts";
+import LandingPage from "./components/LandingPage";
 import { Route, Switch } from 'react-router-dom';
 import * as sessionActions from './store/session';
 
@@ -23,7 +24,9 @@ function App() {
           <Route
           path={'/'}
           exact
-          >Welcome to EverSwole</Route>
+          >
+            <LandingPage />
+          </Route>
           <Route
           path={'/login'}
           exact
