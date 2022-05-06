@@ -7,31 +7,48 @@ import './Navigation.css';
 const Navigation = ({ isLoaded }) => {
     const loggedUser = useSelector(state => state.session.user);
 
-    let sessionLinks;
-    if (loggedUser) {
-        sessionLinks= (
-            <>
-                <ProfileButton user={loggedUser} />
-                <NavLink to={'/exercises'}>My Exercises</NavLink>
-                <NavLink to={'/workouts'}>My Workouts</NavLink>
-            </>
-        )
-    } else {
-        sessionLinks = (
-            <>
-                <NavLink to={'/login'}>Log In</NavLink>
-                <NavLink to={'/signup'}>Sign Up</NavLink>
-            </>
-        )
-    }
-
     return (
-        <ul>
-            <li key='nav'>
-                <NavLink exact to={'/'}>Home</NavLink>
-                {isLoaded && sessionLinks}
-            </li>
-        </ul>
+        <nav className='navBar'>
+            <ul className='nav-list'>
+                <li key='nav'>
+                    <NavLink className='nav-home' exact to='/'
+                    style={(state) => ({
+                        color: state ? 'rgb(200, 243, 200)' : 'rgb(201, 201, 201)'
+                    })}
+                    >Home</NavLink>
+                    <h1 className='nav-header'>EverSwole</h1>
+                    {isLoaded &&
+                    loggedUser ?
+                        <nav className='conditional-nav'>
+                            <ProfileButton user={loggedUser} />
+                            <NavLink className='nav-link' to='/exercises'
+                            style={(state) => ({
+                                color: state ? 'rgb(200, 243, 200)' : 'rgb(201, 201, 201)'
+                            })}
+                            >My Exercises</NavLink>
+                            <NavLink className='nav-link' to='/workouts'
+                            style={(state) => ({
+                                color: state ? 'rgb(200, 243, 200)' : 'rgb(201, 201, 201)'
+                            })}
+                            >My Workouts</NavLink>
+                        </nav>
+                        :
+                        <nav className='conditional-nav'>
+                            <NavLink className='nav-link' to='/login'
+                            style={(state) => ({
+                                color: state ? 'rgb(200, 243, 200)' : 'rgb(201, 201, 201)'
+                            })}
+                            >Log In</NavLink>
+                            <NavLink className='nav-link' to='/signup'
+                            style={(state) => ({
+                                color: state ? 'rgb(200, 243, 200)' : 'rgb(201, 201, 201)'
+                            })}
+                            >Sign Up</NavLink>
+                        </nav>
+                    }
+                </li>
+            </ul>
+        </nav>
     )
 };
 
