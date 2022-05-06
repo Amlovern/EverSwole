@@ -18,9 +18,13 @@ const LandingPage = () => {
                 {loggedUser ?
                 null
                 :
-                <div>
+                <div className='landing-login'>
                     <button onClick={() => history.push('/signup')}>Sign up for free</button>
-                    <Link to='/login'>Already have an account? Log in</Link>
+                    <Link className='landing-login-link' to='/login'
+                    style={{
+                        color: "black"
+                    }}
+                    >Already have an account? Log in</Link>
                 </div>
                 }
             </div>

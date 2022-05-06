@@ -1,6 +1,37 @@
 .landing-header {
-    background-image: url("../../assets/ultra-trail-run.jpg");
-    background-size: cover;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landing-header > h2 {
+    font-size: 64px;
+    margin-bottom: 2%;
+}
+
+.landing-header > h4 {
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 5%;
+}
+
+.landing-login {
+    width: 20%;
+}
+
+.landing-login > button {
+    background-color: #00a82d;
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+    border-style: none;
+    color: white;
+    padding: 3%;
+}
+
+.landing-login-link {
+    font-size: 20px;
 }
 
 .landing-hooks {
