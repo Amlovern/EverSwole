@@ -22,7 +22,7 @@ const DeleteExercise = ({ exercise }) => {
         <div>
             <button className='action-button' onClick={toggleDeleteConfirmOpen}>Delete Exercise</button>
                 {deleteConfirmOpen ?
-                    <div>
+                    <div id="delete">
                         <p className="delete-warning">Are you sure you want to delete?</p>
                         <button className='action-button' value={exercise.id} onClick={handleDelete}>Confirm</button>
                         <button className='action-button' onClick={toggleDeleteConfirmOpen}>Cancel</button>

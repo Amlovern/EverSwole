@@ -39,7 +39,7 @@ const WorkoutPage = () => {
                 <tbody>
                     {workoutList.map((workout) => {
                         return (
-                            <tr>
+                            <tr className="workout-entry">
                                 <td className="name-col">{workout.title}</td>
                                 <td className="username-col">{loggedUser.username}</td>
                                 <td className="actions-col"><DeleteWorkout workout={workout} /></td>

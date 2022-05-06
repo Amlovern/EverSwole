@@ -10,11 +10,16 @@ const router = express.Router();
 const validateExercise = [
     check('title')
         .exists({ checkFalsy: true })
+        .notEmpty()
         .withMessage('Please provide a title.'),
     check('title')
         .exists({ checkFalsy: true })
         .isLength({ max: 256 })
         .withMessage('Title must be less than 256 characters.'),
+    check('content')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage('Please provide a description.'),
     check('content')
         .exists({ checkFalsy: true })
         .isLength({ max: 1000 })
@@ -55,7 +60,7 @@ router.get('/:exerciseId', restoreUser, asyncHandler(async (req, res) => {
     }
 }));
 
-router.post('/', restoreUser, validateExercise, asyncHandler(async (req, res) => {
+router.post('/', restoreUser, validateExercise, asyncHandler(async (req, res, next) => {
     const { user } = req;
     const { title, content, workoutTitle } = req.body;
     const workout = await db.Workout.findOne({
@@ -85,8 +90,11 @@ router.post('/', restoreUser, validateExercise, asyncHandler(async (req, res) =>
         })
         return res.json(foundExercise);
     } else {
-        const errors = validationErrors.array().map((error) => error.msg);
-        console.log(errors)
+        const err = new Error('Workout Edit Failed');
+        err.status = 401;
+        err.title = "Workout Edit Failed"
+        err.errors = validationErrors.array().map((error) => error.msg);
+        return next(err)
     }
 }))
 
