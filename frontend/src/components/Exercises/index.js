@@ -42,7 +42,7 @@ const ExercisesPage = () => {
                 <tbody>
                     {exerciseList.map((exercise) => {
                         return(
-                            <tr>
+                            <tr className='exercise-entry'>
                                 <td className="name-col">{exercise.title}</td>
                                 <td className='description-col'>{exercise.content}</td>
                                 <td className='workout-col'>

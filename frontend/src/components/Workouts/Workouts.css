@@ -10,11 +10,23 @@
     font-size: 16px;
     width: 100%;
     border-style: none;
+    padding: 1%;
 }
 
 .add-workout-form {
     display: flex;
     justify-content: flex-end;
+    margin: 1%;
+}
+
+.add-workout-form > * {
+    margin: .5%;
+    padding: 1%;
+}
+
+.add-workout-form > input {
+    padding: 0.25%;
+    width: 25%;
 }
 
 .add-workout-form-button {
@@ -55,6 +67,11 @@ tbody tr:nth-child(even) {
 .workout-table-headers {
     background-color: rgb(220, 248, 220);
     font-size: 18px;
+}
+
+.workout-entry > td {
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 
 .action-button {
