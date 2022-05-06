@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import './Signup.css';
 
 
 const SignupFormPage = () => {
@@ -37,11 +38,11 @@ const SignupFormPage = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className='sign-up' onSubmit={handleSubmit}>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <label>
+            <label className='sign-up-label'>
                 Username
                 <input
                 type='text'
@@ -52,7 +53,7 @@ const SignupFormPage = () => {
                 }}
                 />
             </label>
-            <label>
+            <label className='sign-up-label'>
                 Email
                 <input
                 type='email'
@@ -63,7 +64,7 @@ const SignupFormPage = () => {
                 }}
                 />
             </label>
-            <label>
+            <label className='sign-up-label'>
                 Password
                 <input
                 type='password'
@@ -74,7 +75,7 @@ const SignupFormPage = () => {
                 }}
                 />
             </label>
-            <label>
+            <label className='sign-up-label'>
                 Confirm Password
                 <input
                 type='password'
