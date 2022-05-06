@@ -1,15 +1,35 @@
 .sign-in {
     font-size: 18px;
     font-weight: bold;
-    background-color: lightgreen;
+    background-color: rgb(200, 243, 200);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .sign-in > * {
     margin: 4px;
 }
 
-.login-button {
-    border-radius: 12%;
-    font-size: 15px;
-    background-color: rgb(224, 245, 224);
+.sign-in > button {
+    background-color: #00a82d;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 1%;
+    border-style: none;
+    margin: 1%;
+    width: 25%;
+}
+
+.login-label {
+    display: flex;
+    flex-direction: column;
+    font-size: 24px;
+    margin: 2%;
+    width: 25%;
+}
+
+.login-label > input {
+    margin: 4%;
 }
