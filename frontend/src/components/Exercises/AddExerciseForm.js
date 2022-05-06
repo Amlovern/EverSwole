@@ -42,12 +42,12 @@ const AddExerciseForm = () => {
 
     return (
         <>
-            <button onClick={toggleIsOpen}>
+            <button className='add-exercise-button' onClick={toggleIsOpen}>
                 Create an Exercise
                 <i class="fa-solid fa-circle-plus"></i>
             </button>
             {isOpen ?
-                <form onSubmit={handleSubmit}>
+                <form className="add-exercise-form" onSubmit={handleSubmit}>
                     <input
                         type='text'
                         placeholder='Exercise Title'
@@ -78,7 +78,8 @@ const AddExerciseForm = () => {
                             )
                         })}
                     </select>
-                    <button type='submit'>Create Exercise</button>
+                    <button className='add-exercise-form-button' type='submit'>Create Exercise</button>
+                    <button className='add-exercise-form-button' type='button' onClick={toggleIsOpen}>Cancel</button>
                 </form>
             : null}
         </>

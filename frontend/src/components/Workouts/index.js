@@ -39,7 +39,6 @@ const WorkoutPage = () => {
                 <tbody>
                     {workoutList.map((workout) => {
                         return (
-
                             <tr>
                                 <td className="name-col">{workout.title}</td>
                                 <td className="username-col">{loggedUser.username}</td>

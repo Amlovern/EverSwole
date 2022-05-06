@@ -5,6 +5,7 @@ import DeleteExercise from './DeleteExercise';
 import EditExerciseForm from './EditExerciseForm';
 import { Redirect, Link } from 'react-router-dom';
 import { getAllExercises } from '../../store/exercise';
+import './Exercises.css';
 
 const ExercisesPage = () => {
     const dispatch = useDispatch();
@@ -25,25 +26,38 @@ const ExercisesPage = () => {
         return null
     };
     return (
-        <div>
+        <div className='exercises-page'>
+            <h1>Exercises</h1>
             <AddExerciseForm />
-            {exerciseList.map((exercise) => {
-                return (
-                    <>
-                        <ul>
-                            <li key={exercise.id}>
-                                <div>Exercise Name: {exercise.title}</div>
-                                <div>Exercise Description: {exercise.content}</div>
-                                <div>Workout Title:
+            <table id='exercises-table'>
+                <thead>
+                    <tr className='exercise-table-headers'>
+                        <th className="name-col" scope='col'>Exercise Name</th>
+                        <th className='description-col' scope='col'>Exercise Description</th>
+                        <th className='workout-col' scope='col'>Workout Title</th>
+                        <th className="username-col" scope='col'>Created by</th>
+                        <th className="actions-col" scope='col'>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {exerciseList.map((exercise) => {
+                        return(
+                            <tr>
+                                <td className="name-col">{exercise.title}</td>
+                                <td className='description-col'>{exercise.content}</td>
+                                <td className='workout-col'>
                                     <Link to={`/workouts/${exercise.Workout.id}`}>{exercise.Workout.title}</Link>
-                                </div>
-                                <DeleteExercise exercise={exercise}/>
-                                <EditExerciseForm exercise={exercise}/>
-                            </li>
-                        </ul>
-                    </>
-                )
-            })}
+                                </td>
+                                <td className="username-col">{loggedUser.username}</td>
+                                <td className="actions-col">
+                                    <DeleteExercise exercise={exercise}/>
+                                    <EditExerciseForm exercise={exercise}/>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
         </div>
     )
 };

@@ -1,0 +1,62 @@
+.exercises-page {
+    display: flex;
+    flex-direction: column;
+    font-family: Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+}
+
+.add-exercise-button {
+    background-color: #00a82d;
+    font-weight: bold;
+    font-size: 16px;
+    width: 100%;
+    border-style: none;
+}
+
+.add-exercise-form {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-exercise-form * {
+    margin-left: 14px;
+}
+
+.add-exercise-form-button {
+    background-color: #00a82d;
+    font-weight: bold;
+    height: 40px;
+}
+
+#exercises-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    font-size: 18px;
+}
+
+.name-col {
+    width: 50%;
+    text-align: left;
+}
+
+.username-col {
+    width: 30%;
+}
+
+.actions-col {
+    width: 20%;
+    text-align: right;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgb(200, 243, 200);
+}
+
+.exercise-table-headers {
+    background-color: rgb(220, 248, 220);
+    font-size: 16px;
+}
