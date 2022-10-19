@@ -1,4 +1,10 @@
 'use strict';
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = 'Everswole';
+};
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Workouts', {
@@ -25,9 +31,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    }, options);
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Workouts');
+    return queryInterface.dropTable('Workouts', options);
   }
 };
