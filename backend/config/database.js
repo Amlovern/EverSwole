@@ -25,7 +25,7 @@ module.exports = {
         rejectUnauthorized: false
       }
     },
-    "define": {
+    define: {
       "schema": "Everswole"
     }
   }
