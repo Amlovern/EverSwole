@@ -2,7 +2,7 @@
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = 'Everswole';
+  options.schema = 'everswole';
 };
 
 module.exports = {
